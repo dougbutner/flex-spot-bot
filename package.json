@@ -1,0 +1,19 @@
+{
+  "name": "flex-spot-bots",
+  "version": "1.0.0",
+  "description": "Alcor spot liquidity bot for FLEX tokens on XPR Network",
+  "private": true,
+  "main": "run.js",
+  "scripts": {
+    "start": "node run.js",
+    "spot": "node run.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eosjs": "^22.1.0",
+    "node-fetch": "^2.6.1"
+  }
+}
