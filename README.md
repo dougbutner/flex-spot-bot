@@ -1,16 +1,20 @@
 # FLEX Spot Bots
 
-**New Earth Finance liquidity on Alcor — take it EASY, let the bot mirror the range.**
+**Ranged liquidity below, reflections above — take it EASY on Alcor.**
 
-This package runs a spot liquidity bot for core [Flex](https://flex.town) tokens on XPR Network. It cancels your stale Alcor orders and replaces them with a small ladder of buys and sells pegged to the live book — the same “abundance in arbitrage” rhythm flex.town describes: reliable volume from the outside world, fees flowing back through reflection mechanics, and pure-liquid tokens staying useful in real markets.
+New Earth Finance runs on real volume. [Flex tokens](https://flex.town) charge a transfer fee, stack reflexive rewards for holders, and stay **pure liquid** in live markets. This bot keeps your Alcor spot book in range: it cancels stale orders and reposts a small ladder pegged to the touch — the same **abundance in arbitrage** rhythm [flex.town](https://flex.town) describes. Outside crypto moves in via wrapped assets; bots and market makers pay transfer fees; reflections splash back to wallets. You mirror the range; the ecosystem keeps flowing.
 
-Markets covered out of the box:
+For tokenomics, contracts, and the Contributors Club, see **[flex.report](https://flex.report)** — the Flex white paper.
 
-| Token | Pair   | Alcor market |
-|-------|--------|--------------|
-| EASY  | XUSDC  | 1268         |
-| INDEX | XPR    | 1375         |
-| MEME  | XPR    | 1213         |
+---
+
+## Markets out of the box
+
+| Token | Pair   | Alcor market | Role |
+|-------|--------|--------------|------|
+| EASY  | XUSDC  | 1268         | Blue-chip flex — pure liquid for stables, 2% reflection |
+| INDEX | XPR    | 1375         | Soft peg to XPR; pool fees buy back on spot (this bot helps repeg) |
+| MEME  | XPR    | 1213         | Fun-first flex for Alcor farms |
 
 You need an XPR account with balances for those pairs, an active key in `.env`, and Node 18+.
 
@@ -32,7 +36,7 @@ cp .env.example .env
 npm start
 ```
 
-That’s it: one line to install dependencies, one line (`npm start`) to run the bot manually.
+Install once. `npm start` whenever you want to refresh the book — or let cron handle it (below).
 
 ---
 
@@ -44,20 +48,22 @@ That’s it: one line to install dependencies, one line (`npm start`) to run the
 | `FLEX_PRIVATE_KEY` | Active private key for that account |
 | `JSON_RPC_XPR` | HTTPS JSON-RPC for XPR mainnet |
 
-Never commit `.env`. Treat the private key like vault access to your Flex chest.
+Never commit `.env`. Treat the private key like vault access to your flex chest.
 
 ---
 
 ## What the bot does
 
-On each run, for every configured market it:
+On each run, for every configured market:
 
 1. Reads your open buy/sell orders on Alcor and cancels them.
 2. Reads the best bid/ask on the book.
-3. Splits your available quote and base balances (with a small reserve) into three weighted orders per side, slightly off the touch using a fixed spread step.
+3. Splits available quote and base balances (with a small reserve) into three weighted orders per side, slightly off the touch using a fixed spread step.
 4. Submits transfers to `alcor` with the correct memos for spot placement.
 
 Runs are sequential with a short pause between markets so RPC and chain stay happy.
+
+**Note:** Flex transfer fees still apply on every move — that is the point. More volume → more reflection pool → [Send It](https://flex.town) when someone splashes rewards. This bot does not manage Solana-side EASY; XPR only.
 
 ---
 
@@ -128,7 +134,8 @@ For step-by-step instructions meant for Cursor, ChatGPT, or other assistants hel
 
 ## Links
 
-- [flex.town](https://flex.town) — Flex tokens, reflections, and Alcor tools
+- [flex.town](https://flex.town) — Send It, flex your reward token, swap, and Flex Tools
+- [flex.report](https://flex.report) — Tokenomics, liftoff guide, Contributors Club
 - [Alcor on XPR](https://alcor.exchange) — DEX where this bot places spot liquidity
 
-Built for contributors who want ranged liquidity below and reflections above — without running the full tin job server.
+Built for Contributors who want **true liquid economies** on Alcor — ranged liquidity below, reflections above — without running the full tin job server.
